@@ -74,9 +74,10 @@ let mapleader = ","
 
 "ハイライト vim-indent-guides
 set tabstop=2 shiftwidth=2 expandtab
+    
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=8
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=102
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=23
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=blue ctermbg=31
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup=1
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -92,6 +93,7 @@ NeoBundle 'cohama/lexima.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'fatih/molokai'
 NeoBundle 'dense-analysis/ale'
+NeoBundle 'udalov/kotlin-vim'
 call neobundle#end()
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -159,5 +161,14 @@ if !exists('g:neocomplete#keyword_patterns')
         let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+"ale
 " 見た目系
+" flake8をLinterとして登録
+let g:ale_linters = {
+    \ 'python': ['pyflakes'],
+    \ }
+
+autocmd ColorScheme * highlight Normal ctermbg=none
+autocmd ColorScheme * highlight LineNr ctermbg=none
+
 colo molokai
