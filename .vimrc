@@ -31,11 +31,14 @@ set laststatus=2
 " コマンドラインの補完
 set wildmode=list:longest
 " 折り返し時に表示行単位での移動できるようにする
-nnoremap j gj nnoremap k gk nnoremap tr :NERDTree
-
+nnoremap j gj
+nnoremap k gk
+nnoremap tr :NERDTree
 nnoremap qr :QuickRun
+
 "ターミナル関連
-nnoremap tt :terminal tnoremap <Esc> <A-w><S-n>
+nnoremap tt :terminal
+tnoremap <Esc> <A-w><S-n>
 " Tab系 不可視文字を可視化(タブが「▸-」と表示される)
 set list listchars=tab:\▸\-
 " Tab文字を半角スペースにする
