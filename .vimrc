@@ -12,13 +12,12 @@ set hidden
 " 入力中のコマンドをステータスに表示する
 set showcmd
 
-
 " 行番号を表示
 set number
 " 現在の行を強調表示
 set cursorline
 " 現在の行を強調表示（縦）
-" set cursorcolumn
+set cursorcolumn
 " 行末の1文字先までカーソルを移動できるように
 set virtualedit=onemore
 " インデントはスマートインデント
@@ -32,16 +31,12 @@ set laststatus=2
 " コマンドラインの補完
 set wildmode=list:longest
 " 折り返し時に表示行単位での移動できるようにする
-nnoremap j gj
-nnoremap k gk
+nnoremap j gj nnoremap k gk nnoremap tr :NERDTree
 
 nnoremap qr :QuickRun
 "ターミナル関連
-nnoremap tt :terminal
-set termkey=<A-w>
-tnoremap <Esc> <A-w><S-n>
-" Tab系
-" 不可視文字を可視化(タブが「▸-」と表示される)
+nnoremap tt :terminal tnoremap <Esc> <A-w><S-n>
+" Tab系 不可視文字を可視化(タブが「▸-」と表示される)
 set list listchars=tab:\▸\-
 " Tab文字を半角スペースにする
 set expandtab
@@ -51,13 +46,12 @@ set tabstop=2
 set shiftwidth=2
 "クイックコンパイルあたり
 filetype plugin on
-augroup setAutoCompile
-    autocmd!
-    autocmd BufWritePost *.tex :!latexmk %:p
+augroup setAutoCompile 
+	autocmd!  
+	autocmd BufWritePost *.tex :!latexmk %:p 
 augroup END
 
-" 検索系
-" 検索文字列が小文字の場合は大文字小文字を区別なく検索する
+" 検索系 検索文字列が小文字の場合は大文字小文字を区別なく検索する
 set ignorecase
 " 検索文字列に大文字が含まれている場合は区別して検索する
 set smartcase
@@ -92,8 +86,13 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'cohama/lexima.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'fatih/molokai'
-NeoBundle 'dense-analysis/ale'
+NeoBundle 'w0rp/ale'
 NeoBundle 'udalov/kotlin-vim'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'jistr/vim-nerdtree-tabs'
+NeoBundle 'octol/vim-cpp-enhanced-highlight'
+NeoBundle 'MaxMEllon/vim-jsx-pretty'
 call neobundle#end()
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -107,12 +106,13 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
+
 let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/'
 filetype plugin indent on
 " シンタックスハイライト
 syntax enable
-highlight Pmenu ctermbg=4
-highlight PmenuSel ctermbg=1
+highlight Pmenu ctermbg=4 
+highlight PmenuSel ctermbg=1 
 highlight PMenuSbar ctermbg=4
 
 " 補完ウィンドウの設定
@@ -125,6 +125,13 @@ set completeopt=menuone
 let g:rsenseUseOmniFunc = 1
 " let g:rsenseHome = '/usr/local/lib/rsense-0.3'
 
+" ale
+let g:ale_linters = {
+    \'python': ['flake8'],
+    \'c++': ['clang', 'g++'],
+    \'javascript': ['eslint'],
+    \}
+let g:ale_echo_msg_format = '[%linter%] %s [%serverity%]'
 " auto-ctagsを使ってファイル保存時にtagsファイルを更新
 let g:auto_ctags = 1
 
@@ -151,24 +158,25 @@ let g:neocomplcache_min_syntax_length = 3
 " 補完の設定
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 "括弧
-hi MatchParen ctermbg=LightGreen ctermbg=blue
+hi MatchParen ctermbg=LightGreen ctermbg=blue 
 if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
+ let g:neocomplete#force_omni_input_patterns = {} 
 endif
 let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 
-if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-endif
+if !exists('g:neocomplete#keyword_patterns') 
+  let g:neocomplete#keyword_patterns = {} 
+endif 
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-"ale
-" 見た目系
-" flake8をLinterとして登録
-let g:ale_linters = {
-    \ 'python': ['pyflakes'],
-    \ }
 
-autocmd ColorScheme * highlight Normal ctermbg=none
+" 見た目系
+autocmd ColorScheme * highlight Normal ctermbg=none 
 autocmd ColorScheme * highlight LineNr ctermbg=none
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99' 
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++1z'
+
+let g:ale_c_cppcheck_options = '' 
+let g:ale_cpp_cppcheck_options = ''
 
 colo molokai
