@@ -48,11 +48,6 @@ set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
 "クイックコンパイルあたり
-filetype plugin on
-augroup setAutoCompile 
-	autocmd!  
-	autocmd BufWritePost *.tex :!latexmk %:p 
-augroup END
 
 " 検索系 検索文字列が小文字の場合は大文字小文字を区別なく検索する
 set ignorecase
@@ -96,6 +91,9 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'jistr/vim-nerdtree-tabs'
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
 NeoBundle 'MaxMEllon/vim-jsx-pretty'
+NeoBundle 'sainhe/edge'
+NeoBundle 'faith/vim-go'
+
 call neobundle#end()
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -131,7 +129,7 @@ let g:rsenseUseOmniFunc = 1
 " ale
 let g:ale_linters = {
     \'python': ['flake8'],
-    \'c++': ['clang', 'g++'],
+    \'cpp': ['g++'],
     \'javascript': ['eslint'],
     \}
 let g:ale_echo_msg_format = '[%linter%] %s [%serverity%]'
@@ -177,9 +175,14 @@ autocmd ColorScheme * highlight Normal ctermbg=none
 autocmd ColorScheme * highlight LineNr ctermbg=none
 
 let g:ale_c_gcc_options = '-Wall -O2 -std=c99' 
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++1z'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++17'
 
-let g:ale_c_cppcheck_options = '' 
+let g:ale_c_clang_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_clang_options = '-Wall -O2 -std=c++17'
+let g:ale_cpp_cc_options = '-std=c++17 -Wall'
+
+let g:ale_c_cppcheck_options = ''
 let g:ale_cpp_cppcheck_options = ''
 
+let g:tex_flavor = 'latex'
 colo molokai
