@@ -47,7 +47,7 @@ set expandtab
 set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
-"クイックコンパイルあたり
+
 
 " 検索系 検索文字列が小文字の場合は大文字小文字を区別なく検索する
 set ignorecase
@@ -68,8 +68,8 @@ let mapleader = ","
 set tabstop=2 shiftwidth=2 expandtab
     
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=23
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=blue ctermbg=31
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red  ctermbg=238
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=blue ctermbg=241
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup=1
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -93,6 +93,7 @@ NeoBundle 'octol/vim-cpp-enhanced-highlight'
 NeoBundle 'MaxMEllon/vim-jsx-pretty'
 NeoBundle 'sainhe/edge'
 NeoBundle 'faith/vim-go'
+NeoBundle 'editorconfig/editorconfig-vim'
 
 call neobundle#end()
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
