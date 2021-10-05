@@ -65,7 +65,7 @@ set runtimepath+=~/.vim/bundle/neobundle.vim/
 let mapleader = ","
 
 "ハイライト vim-indent-guides
-set tabstop=2 shiftwidth=2 expandtab
+set tabstop=2 shiftwidth=2
     
 let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red  ctermbg=238
